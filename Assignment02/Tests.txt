@@ -1,0 +1,279 @@
+Test 1
+Category        : 11. Introduction: i. - v.
+Input Sequence  : 'r'
+Expected Outcome: The game starts on the introduction screen showing student number, game title, an animation
+and the backlight is turned on using PWM. The introduction screen is then skipped.
+Actual Outcome  : Student number and game title are shown but no animation. PWM is used to adjust brightness,
+introduction screen can be skipped using "r".
+Status          : Failed
+
+Test 2
+Category        : 3. Starfighter: i. - v.
+Input Sequence  : 'r'
+Expected Outcome: Only the starfighter and deflector sheild are shown on screen. The starfighter is between 4-7 pixels in height and 5-15 pixels in width, includes a turret
+and is stationary on the screen. It is also horizontally centred in the bottom 8 rows of the screen.
+Actual Outcome  : The starfighter is between 4-7 pixels in height and 5-15 pixels in width. It includes a turret within these dimensions.
+It is horizontally centred in the bottom 8 rows and is stationary till the game is unpaused.
+Status          : Passed
+
+/* Test on Assignment 2 demo */
+Test 3
+Category        : 13. Game time and Game Start: i. 14. i. - iii.
+Input Sequence  : 'r', 'p', *wait about a second*, 'p', 's'
+Expected Outcome: The game is unpaused, paused, then the game status is sent to the screen. The game time starts incrementing when unpaused and does not increment
+when paused.
+Actual Outcome  : When the game is first unpaused, the time starts to increment. The game is then repaused using 'p'.
+'s' is used to send the status to the both the teensy and computer screen, where it is shown that a few seconds have past and the time did not accumulate when paused.
+Status          : Passed
+
+/* Test on Assignment 2 demo */
+Test 4
+Category        : 5. Game Status Information: i. - xii. 6. i. - ii. 13. ii.
+Input Sequence  : 'r', 'p', 'p', 's'
+Expected Outcome: The game is unpaused, game status is sent to the computer screen with a "game started" message. It is then paused, then the game status is sent to the screen manually.
+Actual Outcome  : When the game is first unpaused, status is sent to the computer with a "game started" message". The game is then repaused using "p".
+"s" is used to send the status to the both the teensy and computer screen. The status
+sent to the teensy is game time, remaining lives, and score. While the game status sent to the computer is game time, lives, score, number of asteroids, number
+of boulders, number of fragments, plasma bolts, aim of turret and speed of game.
+Status          : Passed
+
+
+/* Test on Assignment 2 demo */
+Test 5
+Category        : 16. Game over: ii. - iv. 21. i.
+Input Sequence  : 'r', 'l', '0', 'enter'
+Expected Outcome: Game is set to game over screen, options to quit or restart are shown. Backlight fades off and LEDS turn on for 2 seconds.
+Actual Outcome  : No quit or restart options are shown. The LED's shine but do not turn off and the backlight does not fade.
+Status          : Failed
+
+/* Test on Assignment 2 demo */
+Test 6
+Category        : 16. Game over: i. 21. i.
+Input Sequence  : 'r', 'l', '0', 'enter'
+Expected Outcome: Game is set to game over screen, "Game over" message is sent to the teensy screen and the computer screen. The computer screen also displays the current game status.
+Actual Outcome  : A message is sent to the teesny screen and the computer screen. Game status is also sent to the computer.
+Status          : Passed
+
+
+/* Test on Assignment 2 demo */
+Test 7
+Category        : 17. Restart game:
+Input Sequence  : 'r', 'p', 'r'
+Expected Outcome: The game is started and then reset to the state after the introduction screen.
+Actual Outcome  : The game is unpaused and shows normal functionality, when 'r' is pressed it brings it back to the
+state before the game is started.
+Status          :  Passed
+
+/* Test on Assignment 2 demo */
+Test 8
+Category        : 18. Quit game:
+Input Sequence  : 'r', 'p', 'q', 'q'
+Expected Outcome: The game is started and then brought to the game over screen. The game is exited from there, putting the teensy into inverse mode and displaying only the student number.
+Actual Outcome  : The game is brought to the game over screen then exited. The teensy goes into inverse mode and "Demo End" is shown on screen.
+Status          : Failed
+
+/* Test on Assignment 2 demo */
+Test 9
+Category        : 15. Warning lights: i. ii.
+Input Sequence  : 'r', 'p' *try this test a few times to see the device behaviour when asteroids are spawned to different x coordinates*
+Expected Outcome: Before asteroids start to fall from the top of the screen, an LED flashes on which ever side of the screen has more asteroids.
+Actual Outcome  : An LED flashes on the left side if more asteroids are on the left and on the right if there are more on the right. The LED's flash
+just before the asteroids come onto screen.
+Status          : Passed
+
+Test 10
+Category        : 8. Starfighter Movement: i.
+Input Sequence  : 'r', 'p'
+Expected Outcome: The game is started and the starfighter moves either left of right at a speed of 1.
+Actual Outcome  : The starfighter starts to move to the left 1 place at at time when the game is started.
+Status          : Passed
+
+Test 11
+Category        : 8. Starfighter Movement: ii., v.
+Input Sequence  : 'r', 'p', 'd', 'a'
+Expected Outcome: The starfighter moves left on game start, then stops, then moves left again.
+Actual Outcome  : The starfighter starts moving left, it is stopped and then continues to move left.
+Status          : Passed
+
+Test 12
+Category        : 8. Starfighter Movement: iii., vii.
+Input Sequence  : 'r', 'p', 'd', 'd', 'a'
+Expected Outcome: The starfighter moves left on game start, then stops, moves right, then stops.
+Actual Outcome  : The starfighter starts moving left, it is stopped and switches directions to the right, it is then stopped again.
+Status          : Passed
+
+Test 13
+Category        : 8. Starfighter Movement: viii.
+Input Sequence  : 'r', 'p'
+Expected Outcome: The starfighter moves left until it hits the left wall.
+Actual Outcome  : The starfighter starts moving left, it hits the wall and stops.
+Status          : Passed
+
+Test 14
+Category        : 8. Starfighter Movement: viii.
+Input Sequence  : 'r', 'p', 'd', 'd'
+Expected Outcome: The starfighter moves left, then is set to move right until it hits the right wall.
+Actual Outcome  : The starfighter starts moving left, switches to start moving right, it hits the right wall and stops.
+Status          : Passed
+
+Test 15
+Category        : 4. Falling objects: i., ii., ix.
+Input Sequence  : 'r', 'p'
+Expected Outcome: Three asteroids spawn 2 seconds after the game is started and are 7 by 7 pixels and shaped like diamonds. They are assigned random x coordinates and move onto the
+screen one row of pixels at a time.
+Actual Outcome  : Three asteroids spawn straight after the game has started and appear to be 7 by 7 pixel diamonds. They are set to random x positions and move onto the screen
+smoothly, one row at a time.
+Status          : Failed
+
+Test 16
+Category        : 4. Falling objects: v.
+Input Sequence  : 'r', 'p', *wait till asteroids hit the deflector shield* 's'
+Expected Outcome: Three asteroids spawn and move downwards towards the deflector sheild. When they hit it, they disappear. The game status is sent to the
+screen showing that the lives have decreased from 5 to 2.
+Actual Outcome  : Three asteroids spawn and eventually hit the deflector sheild. Game status is sent to screen and the amount of lives shows 2.
+Status          : Passed.
+
+/* Test on Assignment 2 demo */
+Test 17
+Category        : 9. Plasma Cannon Aiming Direction: ii. - iii.
+Input Sequence  : 'r', 'p', *set potentiometer to physical minimum then to its physical maximum*
+Expected Outcome: The turret of the starfighter should be set as far left as it can (-60 degrees) then it should smoothly tilt to as far to the right as it can go (60 degrees).
+Actual Outcome  : The turret sets to as far left as it can go (resembling -60 degrees) then it smoothly tilts little by little to as far right as it can go (resembling 60 degrees).
+Status          : Passed
+
+/* Test on Assignment 2 demo */
+Test 18
+Category        : 9. Plasma Cannon Aiming Direction: i., iv.
+Input Sequence  : 'r', 'p', 'o', '-60', 'enter'
+Expected Outcome: The aim of the turret should override from the potentiometers value and be set to -60 degrees.
+Actual Outcome  : The aim of the turret is set to the left at -60 degrees.
+Status          : Passed
+
+/* Test on Assignment 2 demo */
+Test 19
+Category        : 9. Plasma Cannon Aiming Direction: i., iv.
+Input Sequence  : 'r', 'p', 'o', '0', 'enter'
+Expected Outcome: The aim of the turret should override from the potentiometers value and be set to about 0 degrees.
+Actual Outcome  : The aim of the turret is set straight up at 0 degrees.
+Status          : Passed
+
+/* Test on Assignment 2 demo */
+Test 20
+Category        : 9. Plasma Cannon Aiming Direction: i., iv.
+Input Sequence  : 'r', 'p', 'o', '60', 'enter'
+Expected Outcome: The aim of the turret should override from the potentiometers value and be set to about 60 degrees.
+Actual Outcome  : The aim of the turret is set to the right at 60 degrees.
+Status          : Passed
+
+Test 21
+Category        : 10. Firing Plasma Bolts: i.
+Input Sequence  : 'r', 'p', *hold* 'w'
+Expected Outcome: The starfighter shoots multiple plasma bolts. However, they have a 0.2 second delay between them.
+Actual Outcome  : Plasma bolts are consistenly fired with a small delay between them.
+Status          : Passed
+
+Test 22
+Category        : 10. Firing Plasma Bolts: iv. - v.
+Input Sequence  : 'r', 'p', *hold* 'w'
+Expected Outcome: The starfighter shoots multiple plasma bolt until the maximum amount is present on the screen. Then it does nothing
+when 'w' is pressed.
+Actual Outcome  : Plasma bolts are consistenly fired until the maximum amount is on the screen. The firing stutters when the max amount of
+plasma bolts has been shot.
+Status          : Failed
+
+Test 23
+Category        : 10. Firing Plasma Bolts: iii.
+Input Sequence  : 'r', 'p', *hold* 'w'
+Expected Outcome: Plamsa bolts are shot, then disappear of screen when they reach the edge.
+Actual Outcome  : Some plasma bolts are shot then dissapear off the top of the screen.
+Status          : Passed
+
+
+/* Test on Assignment 2 demo */
+Test 24
+Category        : 10. Firing Plasma Bolts: ii.
+Input Sequence  : 'r', 'p', 'o', '60', 'enter', *hold* 'w'
+Expected Outcome: The turret is set to 60 degrees and plasma bolts are fired. They travel at a constant velocity in the same direction 
+the turret is set to.
+Actual Outcome  : The turret is set to the right and plasma bolts are shot. The plasma bolts travel to the right aswell.
+Status          : Passed
+
+/* Test on Assignment 2 demo */
+Test 25
+Category        : 10. Firing Plasma Bolts: ii.
+Input Sequence  : 'r', 'p', 'o', '-60', 'enter', *hold* 'w'
+Expected Outcome: The turret is set to -60 degrees and plasma bolts are fired. They travel at a constant velocity in the same direction 
+the turret is set to.
+Actual Outcome  : The turret is set to the left and plasma bolts are shot. The plasma bolts travel to the left aswell.
+Status          : Passed
+
+/* Test on Assignment 2 demo */
+Test 26
+Category        : 7. Collision Detection: i. 4. Falling objects: vi. 10. Firing Plasma Bolts: iii., vi. 21. Game cheats: v.
+Input Sequence  : 'r', 'p', 'm', '0', 'enter', 'o', '0', 'enter', 'j', '0', '30', 'enter', 'w', *wait for plasma bolt to collide* 's'
+Expected Outcome: The speed of the game is set to 0. The starfighter moves left until it hits the left wall. An asteroid is placed above it
+and the starfighter shoots a single plasma bolt. The asteroid splits to form 2 boulders and the plasma bolt dissapears. The game status is sent to screen and the score increases by 1.
+Actual Outcome  : The game essentially stops except for the starfighter that travels all the way to the left. An asteroid is placed above it and
+is shot. It splits into 2 boulders. When the game status is sent to screen the score reads 1.
+Status          : Passed
+
+
+/* Test on Assignment 2 demo */
+Test 27
+Category        : 7. Collision Detection: i. 4. Falling objects: vi., x. 10. Firing Plasma Bolts: iii., vii. 21. Game cheats: vi.
+Input Sequence  : 'r', 'p', 'm', '0', 'enter', 'o', '0', 'enter', 'k', '3', '30', 'enter', 'w', *wait for plasma bolt to collide* 's'
+Expected Outcome: The speed of the game is set to 0. The starfighter moves left until it hits the left wall. A boulder is placed above it
+and the starfighter shoots a single plasma bolt. The boulder appears to be 5 by 5 pixels in the shape of a diamond. The boulder splits to form 2 fragments. The game status is sent to screen and the score increases by 2.
+Actual Outcome  : The game essentially stops except for the starfighter that travels all the way to the left. A boulder is placed above it and
+is shot. It splits into 2 fragments. When the game status is sent to screen the score reads 2.
+Status          : Passed
+
+/* Test on Assignment 2 demo */
+Test 28
+Category        : 7. Collision Detection: i. 4. Falling objects: vi., xi. 10. Firing Plasma Bolts: iii., viii. 21. Game cheats: vii.
+Input Sequence  : 'r', 'p', 'm', '0', 'enter', 'o', '0', 'enter', 'i', '3', '30', 'enter', 'w', *wait for plasma bolt to collide* 's'
+Expected Outcome: The speed of the game is set to 0. The starfighter moves left until it hits the left wall. A fragment is placed above it
+and the starfighter shoots a single plasma bolt. The fragment appears to be 3 by 3 pixels in the shape of a plus. The fragment disappears along with the plasma bolt. The game status is sent to screen and the score increases by 4.
+Actual Outcome  : The game essentially stops except for the starfighter that travels all the way to the left. A fragment is placed above it and
+is shot. It disappears. When the game status is sent to screen the score reads 4.
+Status          : Passed
+
+/* Test on Assignment 2 demo */
+Test 29
+Category        : 19. Speed of the game: i. - ii.
+Input Sequence  : 'r', 'p', 'm', '0', 'enter'
+Expected Outcome: The speed of the game is slowed down to essentially no movement. The starfighter is not affected by this.
+Actual Outcome  : The game seems to pause entirely except for the motion of the starfighter.
+Status          : Passed
+
+/* Test on Assignment 2 demo */
+Test 30
+Category        : 19. Speed of the game: i. - ii.
+Input Sequence  : 'r', 'p', 'm', '1023', 'enter'
+Expected Outcome: The speed of the game is increased to its maximum. The game however is still playable.
+Actual Outcome  : The game seems to speed up a fair bit. The difficulty has increased, but it is still playable.
+Status          : Passed
+
+/* Test on Assignment 2 demo */
+Test 31
+Category        : 21. Game cheats: ii.
+Input Sequence  : 'r', 'p', 'g', '5', 'enter', 's'
+Expected Outcome: The score of the game is set to 5.
+Actual Outcome  : The score is set to 5. Game status is sent to screen and confirms this.
+Status          : Passed
+
+Test 32
+Category        : 21. Game cheats: iii.
+Input Sequence  : 'r', 'p', '?'
+Expected Outcome: Game controls are sent to the computer screen.
+Actual Outcome  : The controls for the game are sent to the computer screen.
+Status          : Passed
+
+/* Test on Assignment 2 demo */
+Test 33
+Category        : 21. Game cheats: iv.
+Input Sequence  : 'r', 'p', 'h', '0'
+Expected Outcome: The starfighters position is set to the left edge of the screen.
+Actual Outcome  : The starfighter jumps to the left of the screen, right against the left wall.
+Status          : Passed
+

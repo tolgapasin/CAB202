@@ -1,0 +1,139 @@
+*** Each test assumes that the input is entered after booting up the program on the teensy ***
+
+Test 1
+Category        : 2. Deflector Shield:, 12. Game initial set-up:, 3. Starfighter:, 5. Game Status Information:
+Input Sequence  : Input the left button or 'r' while the introduction screen is displayed, to get to the initial game screen.
+Expected Outcome: The introduction screen is bypassed and the initial game screen is shown in a paused state. A deflector
+shield is visible on row 39 as a 1 pixel high horizontal dotted line. The starfighter is horizontally centred in the bottom 8 rows of
+the teensy's screen and is between 4-7 pixels in height and 5-15 pixels in width. The top of the starfighter is comprised by a plasma
+cannon which is included in the 7 pixel height limit. From the plasma cannon a linear wave-guide extends outwards. No other objects
+such as asteroids are displayed at this stage. And all aspects of the game should be stationary (including the starfighter). Additionaly, no part of
+the starfighter should overlap the deflector shield.
+The games status will be sent to the computer the teensy is connected to and displayed
+through putty. It will display, game time (starting at 00.00), deflector sheild lives (starting at 5), score (starting at 0), number of asteroids on screen,
+number of boulders on screen, number of fragments on screen, aim of the turret and speed of the game.
+
+Test 2
+Category        : 4. Falling objects:, 3. Starfighter: 14. Game pause:, 15. Warning lights:
+Input Sequence  : Input the left button or 'r' on the keyboard while the introduction screen is displayed,
+to get to the initial game screen. Then input joystick centre or 'p' to unpause and start the game.
+Expected Outcome: The introduction screen is bypassed and the game is unpaused to start the game. The starfighter will start to move left at a speed of one
+until it hits a wall where it will stop. After two seconds three asteroids are spawned to random x coordinates above the screen and smoothly fall down into view
+one row of pixels at a time. Asteroids are 7 pixels by 7 pixels and shaped like diamonds. If there are more asteroids on the left side, the left LED will flash as they start to
+appear on the screen. Otherwise if there are more on the right, the right LED will flash. The asteroids must only fall downards and may not
+go outside any of the edges of the screen besides the top. When any falling object touches the deflector shield, the object disappears and one
+life of the deflector shield is taken. If all asteroids, collide with the deflector shield, a new wave starts to fall.
+
+Test 3
+Category        : 5. Game Status Information:, 6. Game Status control:, 13. Game time and Game start:
+Input Sequence  : Input the left button or 'r' while the introduction screen is displayed,
+to get to the initial game screen. Then input joystick centre or 'p' to unpause and start the game and
+let it run for a few seconds. Then input joystick down or 's' to send the game status to the 
+screen of the teensy.
+Expected Outcome: The introduction screen is bypassed and the game is unpaused to start the game. The games timer starts as the game is unpaused and a "game started" message
+is sent to the computer screen status display. The game is run for a few seconds then the game status is sent to the teensy screen. The screen should consist of the game time
+(which should display the format mm:ss, with a few seconds past), the remaining lives of the deflector shield (which should show 0) and the score of the player (which should also show 0).
+The information sent to the computer screen should reflect the same values but show additional information as explained in test 1 but the amount of asteroids on screen will show as three.
+
+Test 4
+Category        : 7. Collision Detection:, 4. Falling objects:, 21. Game cheats:, 10. Firing Plasma Bolts:
+Input Sequence  : Input the left button or 'r' while the introduction screen is displayed,
+to get to the initial game screen. Then input joystick centre or 'p' to unpause and start the game.
+Then input 'j' to place an asteroid at a certain coordinate and enter 0(x coord), 20(y coord). Press joystick left or 'a' twice to ensure the starship 
+travels left (because it may travel at a random direction at start). Once it is against the left wall and lined up with the asteroid input a single instance of joystick up or 'w' to fire a plasma bolt. Two boulders will appear, 
+wait till they hit the deflector shield then input joystick down or 's' to see the game status.
+Expected Outcome: The introduction screen is bypassed and the game is unpaused to start the game. A game cheat is used to place the asteroid near the centre of of the screen 
+vertically and against the left wall. A single plasma bolt is fired when the starfighter reaches the left wall. The plasma bolt should travel upwards and hit the asteroid. When the asteroid and 
+the plasma bolt collide the asteroid should split and form two boulders and the plasma bolt should disappear. Boulders are shaped like diamonds and are 5 pixels by 5 pixels. The boulder will acquire a new velocity and be within += 30 
+degrees of the asteroids heading in which it came from. The boulders must not go off the left bottom or right edge of the screen but can overlap each other. When the status display is brought up, the
+score will show as one.
+
+/// COPY AND PASTE AND CHANGE FOR BOULDERS (SCORE +2) AND FRAGMENTS (SCORE +4)
+
+Test 5
+Category        : 8. Starfighter Movement: 
+Input Sequence  : Input the left button or 'r' while the introduction screen is displayed,
+to get to the initial game screen. Then input joystick centre or 'p' to unpause and start the game. Then input joystick left or 'a' twice to
+ensure the starfighter travels left. Once it hits the left wall, press joystick right or 'd' so that the starfighter travels right.
+Expected Outcome: The introduction screen is bypassed and the game is unpaused to start the game. The starfighter travels left till it reaches the edge of the screen and stops. Then the starfighter travels
+right till it reaches the other edge of the screen and stops.
+
+Test 6
+Category        : 8. Starfighter Movement: 
+Input Sequence  : Input the left button or 'r' while the introduction screen is displayed,
+to get to the initial game screen. Then input joystick centre or 'p' to unpause and start the game. Then input joystick left or 'a'  twice to
+ensure the starfighter travels left. While it is travelling left press joystick right or 'd' so that the starfighter stops, press it again so that it travels right. While the 
+starfighter is travelling right, press the joystick left or 'a' to make it stop. Press it once more to make it travel left.
+Expected Outcome: The introduction screen is bypassed and the game is unpaused to start the game. The starfighter travels left then stops. It then travels right then stops and travels left again.
+
+Test 7
+Category        : 8. Starfighter Movement: 
+Input Sequence  : Input the left button or 'r' on the keyboard while the introduction screen is displayed,
+to get to the initial game screen. Then input joystick centre or 'p' on the keyboard to unpause and start the game. Then input joystick left or 'a' twice to
+ensure the starfighter travels left. Press it again and observe movement. Wait for the starfighter to hit the left wall. Press joystick right or 'd' to make it travel right. While it is travelling right press it again so 
+and observe movement.
+Expected Outcome: The introduction screen is bypassed and the game is unpaused to start the game. The starfighter travels left when 'a' is inputted a second time it should not affect its movement. It stops when it reaches
+the left wall then travels right when 'd' is inputted a second time it should not affect movement either.
+
+Test 8
+Category        : 9. Plasma Cannon Aiming Direction: 
+Input Sequence  : Input the left button or 'r' on the keyboard while the introduction screen is displayed,
+to get to the initial game screen. Then input joystick centre or 'p' on the keyboard to unpause and start the game. Turn the left potentiometer to its minimum (downwards all the way). Then turn it to its maximum (up all the way).
+Expected Outcome: The introduction screen is bypassed and the game is unpaused to start the game. The plasma cannon on the star ship points directly upwards or at 0 degrees. When the potentiometer is turned down, it tilts over to the left
+untill it reaches -60 degrees. When the potentiometer is turned up, the plasma cannon tilts right untill it reaches +60 degrees and stops there.
+
+
+Test 9
+Category        : 9. Plasma Cannon Aiming Direction: 
+Input Sequence  : Input the left button or 'r' on the keyboard while the introduction screen is displayed,
+to get to the initial game screen. Then input joystick centre or 'p' on the keyboard to unpause and start the game. Press 'o' and enter 0. Press 'o' again and enter 205. Press 'o' again and enter 410. Press 'o' again and enter 614.
+Press 'o' one last time and enter 1023.
+Expected Outcome: The introduction screen is bypassed and the game is unpaused to start the game. The plasma cannon on the star ship points directly upwards or at 0 degrees. When the first command is entered the plasma cannon will display
+at -60 degrees. When the second command is entered the plasma cannon will display about -30 degrees. When the third command is entered the plasma cannon will display at about 0 degrees. When the fourth command is entered, the plasma cannon
+will display at around +30 degrees. And when the final command is entered the plasma cannon will display at +60 degrees.
+
+
+Test 10
+Category        : 10. Firing Plasma Bolts: 
+Input Sequence  : Input the left button or 'r' on the keyboard while the introduction screen is displayed,
+to get to the initial game screen. Then input joystick centre or 'p' on the keyboard to unpause and start the game. Hold the joystick up or hold 'w'. Observe plasma bolts.
+Expected Outcome: The introduction screen is bypassed and the game is unpaused to start the game. Many plasma bolts will be fired in a line. They should display a small gap between each shot as there should be a 0.2 second space between them.
+
+
+Test 11
+Category        : 10. Firing Plasma Bolts: 
+Input Sequence  : Input the left button or 'r' on the keyboard while the introduction screen is displayed,
+to get to the initial game screen. Press the joystick up or press 'w'. Press 'o' and enter 0 then press the joystick up or press 'w' again. Press the joystick up or press 'w'. Press 'o' and enter 1023 then press the joystick up or press 'w' again.
+Expected Outcome: The introduction screen is bypassed and the game is unpaused to start the game. A plasma bolt is fired and it should travel directly upward, when it reaches the top of the screen it should disappear. The plasma cannon is set to -60 degrees and 
+another bolt is fired, it should travel at outward at -60 degrees, when it reaches left edge of the screen it should disappear. The plasma cannon is then set to +60 degrees and another bolt is fired, it should travel it should travel outward at +60 degrees
+when it reaches the right edge of the screen it should disappear.
+
+Test 12
+Category        : 10. Firing Plasma Bolts: 
+Input Sequence  : Input the left button or 'r' on the keyboard while the introduction screen is displayed,
+to get to the initial game screen. Hold the joystick up or press 'w' until plasma bolts cease to fire.
+Expected Outcome: The introduction screen is bypassed and the game is unpaused to start the game. Many plasma bolts are fired in a direct line upwards. Eventually when the limit (between 20 and 100) is reached the command to fire plasma bolts will do nothing and
+no more will appear on the screen until they have disappeared by hitting a falling object or going off the screen.
+
+
+// score increase is part of collision. do for boulders and fragments.
+// INTRO SCREEN
+// GAME INITIAL SETUP (I THINK ITS COVERED)
+// GAME TIME && // GAME PAUSE CHECK TIME STOP INCEMENTING
+AND GAME RESUMES AND TIME RESUMES
+// WARNING lights covered
+// GAME OVER
+// RESTART GAME
+// QUIT GAME
+// SPEED OF GAME
+// GAME CHEATS (EXTRA ONES)
+
+
+
+
+
+//// Maybe add additional controls not stated in other tests such as '?'
+
+
+
+... Insert sufficient additional tests here ...

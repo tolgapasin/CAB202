@@ -1,0 +1,223 @@
+
+#==============================================================================
+category="Test Setup Dust"
+details="Setups up a piece of dust."
+expect="The simulation asks the user how much of each type of rubbish to produce. One piece of dust is specified and is drawn at a random location within the bounds of the borders. The status bar should display 'Rubbish Available: 1, 0, 0'"
+
+cmd=$(
+	enter 1
+	enter 0
+	enter 0
+	pause_resume
+	set_timeout 3
+)
+
+run_test 
+
+#==============================================================================
+category="Test Setup Slime"
+details="Setups up a piece of slime."
+expect="The simulation asks the user how much of each type of rubbish to produce. One piece of slime is specified and is drawn at a random location within the bounds of the borders. The status bar should display 'Rubbish Available: 0, 1, 0'"
+
+cmd=$(
+	enter 0
+	enter 1
+	enter 0
+	pause_resume
+	set_timeout 3
+)
+
+run_test 
+
+#==============================================================================
+category="Test Setup Trash"
+details="Setups up a piece of trash."
+expect="The simulation asks the user how much of each type of rubbish to produce. One piece of trash is specified and is drawn at a random location within the bounds of the borders. The status bar should display 'Rubbish Available: 0, 0, 1'"
+
+cmd=$(
+	enter 0
+	enter 0
+	enter 1
+	pause_resume
+	set_timeout 3
+)
+
+run_test 
+
+#==============================================================================
+category="Test Setup All Rubbish"
+details="Setups up a piece of each type of rubbish."
+expect="The simulation asks the user how much of each type of rubbish to produce. One piece of each type is specified and is drawn at a random location within the bounds of the borders. The status bar should display 'Rubbish Available: 1, 1, 1'"
+
+cmd=$(
+	enter 1
+	enter 1
+	enter 1
+	pause_resume
+	set_timeout 3
+)
+
+run_test 
+
+
+
+
+#==============================================================================
+category="Test Slime Collection"
+details="The vacuum correctly collects the pieces of slime."
+expect="Many pieces of slime are spread out over the room. When the vacuum passes over them, they dissapear and the weight in the status bar increases by 5g each time."
+
+cmd=$(
+	enter 0
+	enter 8
+	enter 0
+	pause_resume
+	set_timeout 5
+)
+
+run_test
+
+#==============================================================================
+category="Test Trash Collection"
+details="The vacuum correctly collects the pieces of trash."
+expect="Many pieces of trash are spread out over the room. When the vacuum passes over them, they dissapear and the weight in the status bar increases by 20g each time."
+
+cmd=$(
+	enter 0
+	enter 0
+	enter 5
+	pause_resume
+	set_timeout 5
+)
+
+run_test
+
+
+
+
+
+#==============================================================================
+category="Test Move Vacuum Cheat 2"
+details="With user input, the vacuum jumps to a new location."
+expect="The character 'v' is inputted and the vacuum jumps to a the specified location 100, 20 with a heading of 90."
+
+cmd=$(
+	enter 0
+	enter 0
+	enter 0
+	pause_resume
+	move_vacuum 100 20 90
+	set_timeout 3
+	
+)
+
+run_test
+
+
+
+
+### Test will not time out. Therefore it is commented out.
+#==============================================================================
+# category="Test Negative Amount of Rubbish"
+# details="A negative value is input into the amount of rubbish."
+# expect="The simulation asks the user how much of each type of rubbish to produce. A negative value is entered for all types. The status display should ignore this and show 'Rubbish Available: 0, 0, 0'."
+
+# cmd=$(
+# 	enter -1
+# 	enter -1
+# 	enter -1
+# 	pause_resume
+# 	set_timeout 5
+# )
+# ####################### WONT TIMEOUT
+
+# run_test
+
+
+
+#==============================================================================
+category="Test Item 12: More than Max Amount of Rubbish"
+details="A value greater than the maximum allowed is input into the amount of rubbish."
+expect="The simulation asks the user how much of each type of rubbish to produce. A value greater than what is allowed is entered for all types. The status display should ignore this and show 'Rubbish Available: 0, 0, 0'."
+
+cmd=$(
+	enter 1001
+	enter 11
+	enter 6
+	pause_resume
+	set_timeout 3
+)
+
+
+run_test
+
+
+
+#==============================================================================
+category="Test Item 15: Reduce Delay"
+details="With user input, the delay time is reduced."
+expect="The character 'm' is inputted and the delay is specified to 1 this will speed up the simulations movement."
+
+cmd=$(
+	enter 0
+	enter 0
+	enter 0
+	pause_resume
+	set_delay 1
+	set_timeout 3
+	
+)
+
+run_test 
+
+
+
+#==============================================================================
+category="Test Item 12: Setup Multiple Pieces Rubbish"
+details="Setups up multiple pieces of each type of rubbish."
+expect="The simulation asks the user how much of each type of rubbish to produce. Multiple pieces of each type is specified and are drawn at random locations within the bounds of the borders. The status bar should display 'Rubbish Available: 3, 3, 3'. And no piece of rubbish should be drawn under or overlap with another piece of rubbish, the vacuum, the charging dock or the outlines of the room."
+
+cmd=$(
+	enter 3
+	enter 3
+	enter 3
+	pause_resume
+	set_timeout 3
+)
+
+run_test 
+
+#==============================================================================
+category="Test Item 12: Setup Max Pieces Rubbish"
+details="Setups up the maximum allowed pieces of each type of rubbish."
+expect="The simulation asks the user how much of each type of rubbish to produce. The maximum allowed number of pieces of each type is specified and are drawn at random locations within the bounds of the borders. The status bar should display 'Rubbish Available: 1000, 10, 5'."
+
+cmd=$(
+	enter 1000
+	enter 10
+	enter 5
+	pause_resume
+	set_timeout 3
+)
+
+
+run_test
+
+
+
+
+#==============================================================================
+category="Test Item 12: Battery Drain"
+details="The battery in the status bar shows normal drainage functionality."
+expect="The battery life will decrease by 1% each second. As a precaution, when it reaches 25%, it will return to base."
+
+cmd=$(
+	enter 0
+	enter 0
+	enter 0
+	pause_resume
+	set_timeout 5
+	
+)
+
+run_test 
